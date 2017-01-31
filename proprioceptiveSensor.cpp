@@ -1,7 +1,7 @@
 #ifndef _PROPRIOCEPTIVE_SENSOR_CPP
 #define _PROPRIOCEPTIVE_SENSOR_CPP
 
-#include "iostream"
+#include "fstream"
 
 #include "proprioceptiveSensor.h"
 
@@ -45,7 +45,7 @@ void PROPRIOCEPTIVE_SENSOR::Update_Sensor_Neurons(int t) {
                 mySensorNeuron->Set( angles[t] );
 }
 
-void PROPRIOCEPTIVE_SENSOR::Write_To_Python(int evalPeriod) {
+void PROPRIOCEPTIVE_SENSOR::Write_To_Python(int evalPeriod, ofstream *outFile) {
 
         char outString[1000000];
 
@@ -57,7 +57,7 @@ void PROPRIOCEPTIVE_SENSOR::Write_To_Python(int evalPeriod) {
 
         sprintf(outString,"%s \n",outString);
 
-        std::cout << outString;
+        (*outFile) << outString;
 }
 
 #endif

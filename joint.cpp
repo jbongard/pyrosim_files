@@ -167,11 +167,11 @@ void JOINT::Update_Sensor_Neurons(int t) {
                 proprioceptiveSensor->Update_Sensor_Neurons(t);
 }
 
-void JOINT::Write_To_Python(int evalPeriod) {
+void JOINT::Write_To_Python(int evalPeriod, ofstream *outFile) {
 
         if ( proprioceptiveSensor )
 
-                proprioceptiveSensor->Write_To_Python(evalPeriod);
+                proprioceptiveSensor->Write_To_Python(evalPeriod,outFile);
 }
 
 // ------------------- Private methods --------------------------

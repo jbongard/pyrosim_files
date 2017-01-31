@@ -1,6 +1,9 @@
 #ifndef _OBJECT_H
 #define _OBJECT_H
 
+#include "iostream"
+using namespace std;
+
 #include <ode/ode.h>
 #include "raySensor.h"
 #include "lightSensor.h"
@@ -89,7 +92,7 @@ public:
 
 	void Update_Sensor_Neurons(int t);
 
-	void Write_To_Python(int evalPeriod);
+	void Write_To_Python(int evalPeriod, ofstream *outFile);
 
 private:
 	int  Contains_A_Light_Source(void);

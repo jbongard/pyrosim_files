@@ -1,5 +1,5 @@
 import math
-import sys
+import sys, os, random
 import numpy as np
 
 import constants
@@ -28,11 +28,19 @@ class PYROSIM:
 
 			commandsToSend.append('-pause')
 
-		self.simulator = Popen(commandsToSend, stdout=PIPE, stdin=PIPE, stderr=PIPE)
+		# self.simulator = Popen(commandsToSend, stdout=PIPE, stdin=PIPE, stderr=PIPE)
 
-		# self.simulator = Popen(commandsToSend, stdout=PIPE, stdin=PIPE)
+		self.simulator = Popen(commandsToSend, stdout=PIPE, stdin=PIPE)
+
+		self.Send_File_Name()
 
 		self.Send('EvaluationTime '+str(evalTime)+'\n')
+
+	def Send_File_Name(self):
+
+		self.fileName = random.randint(0,32767)
+
+		self.Send('FileName '+str(self.fileName)+'\n')
 
 	def Get_Sensor_Data(self,sensorID=0,s=0):
 
@@ -289,9 +297,46 @@ class PYROSIM:
 
 		dataFromSimulator = self.simulator.communicate()
 
-		self.Collect_Sensor_Data(dataFromSimulator)
+		self.Collect_Sensor_Data_From_File()
+
+		# print self.dataFromPython
+
+		#self.Collect_Sensor_Data(dataFromSimulator)
 
 # --------------------- Private methods -----------------------------
+
+	def Collect_Sensor_Data_From_File(self):
+
+                self.dataFromPython = np.zeros([self.numSensors,4,self.evaluationTime],dtype='f')
+
+		f = open(str(self.fileName)+'.dat','r')
+
+		for line in f.readlines():
+
+			line = line.split()
+
+			index = 0
+
+			ID = int( line[index] )
+
+			index = index + 1
+
+			numSensorValues = int( line[index] )
+
+			index = index + 1
+
+			for t in range(0,self.evaluationTime):
+
+				for s in range(0,numSensorValues):
+
+					sensorValue = float( line[index] )
+
+					self.dataFromPython[ID,s,t] = sensorValue
+
+					index = index + 1	
+		f.close()
+
+		os.remove(str(self.fileName)+'.dat')
 
 	def Collect_Sensor_Data(self,dataFromSimulator):
 

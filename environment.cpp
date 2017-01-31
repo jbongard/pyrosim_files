@@ -3,6 +3,8 @@
 
 #include "environment.h"
 #include "iostream"
+#include <fstream>
+using namespace std;
 
 extern int BOX;
 extern int CYLINDER;
@@ -49,7 +51,12 @@ void ENVIRONMENT::Read_From_Python(dWorldID world,dSpaceID space, int *evaluatio
 
         while ( strcmp(incomingString,"Done") != 0 ) {
 
-                if ( strcmp(incomingString,"EvaluationTime") == 0 )
+                if ( strcmp(incomingString,"FileName") == 0 ) {
+
+                        std::cin >> fileNameIndex;
+		}
+
+                else if ( strcmp(incomingString,"EvaluationTime") == 0 )
 
 			std::cin >> (*evaluationTime);
 
@@ -137,15 +144,22 @@ void ENVIRONMENT::Update_Neural_Network(int t) {
 
 void ENVIRONMENT::Write_Sensor_Data(int evalPeriod) {
 
+	char fileName[100];
+	sprintf(fileName,"%d.dat",fileNameIndex);
+
+	ofstream *outFile = new ofstream(fileName,ofstream::out);
+
 	for (int i=0;i<numberOfBodies;i++)
 
-		objects[i]->Write_To_Python(evalPeriod);
+		objects[i]->Write_To_Python(evalPeriod,outFile);
 
         for (int j=0;j<numberOfJoints;j++)
 
-        	joints[j]->Write_To_Python(evalPeriod);
+        	joints[j]->Write_To_Python(evalPeriod,outFile);
 
-	std::cout << "Done\n";
+	outFile->close();
+	delete outFile;
+	outFile = NULL;
 }
 
 // ----------------------- Private methods ---------------------------

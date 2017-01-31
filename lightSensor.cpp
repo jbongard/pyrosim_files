@@ -1,7 +1,7 @@
 #ifndef _LIGHT_SENSOR_CPP
 #define _LIGHT_SENSOR_CPP
 
-#include "iostream"
+#include "fstream"
 #include "lightSensor.h"
 #include "neuron.h"
 
@@ -54,7 +54,7 @@ void LIGHT_SENSOR::Update_Sensor_Neurons(int t) {
 		mySensorNeuron->Set( values[t] );
 }
 
-void LIGHT_SENSOR::Write_To_Python(int evalPeriod) {
+void LIGHT_SENSOR::Write_To_Python(int evalPeriod, ofstream *outFile) {
 
         char outString[1000000];
 
@@ -66,7 +66,7 @@ void LIGHT_SENSOR::Write_To_Python(int evalPeriod) {
 
         sprintf(outString,"%s \n",outString);
 
-        std::cout << outString;
+        (*outFile) << outString;
 }
 
 #endif

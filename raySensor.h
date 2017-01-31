@@ -1,6 +1,8 @@
 #ifndef _RAY_SENSOR_H
 #define _RAY_SENSOR_H
 
+using namespace std;
+
 #include <ode/ode.h>
 
 class OBJECT;
@@ -47,7 +49,7 @@ public:
 
         void Update_Sensor_Neurons(int t);
 
-	void Write_To_Python(int evalPeriod);
+	void Write_To_Python(int evalPeriod, ofstream *outFile);
 };
 
 #endif

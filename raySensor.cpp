@@ -1,7 +1,7 @@
 #ifndef _RAY_SENSOR_CPP
 #define _RAY_SENSOR_CPP
 
-#include "iostream"
+#include "fstream"
 #include "raySensor.h"
 #include "object.h"
 #include <drawstuff/drawstuff.h>
@@ -143,7 +143,7 @@ void RAY_SENSOR::Update_Sensor_Neurons(int t) {
                 mySensorNeurons[3]->Set( b[t] );
 }
 
-void RAY_SENSOR::Write_To_Python(int evalPeriod) {
+void RAY_SENSOR::Write_To_Python(int evalPeriod, ofstream *outFile) {
 
 	char outString[1000000];
 
@@ -155,7 +155,7 @@ void RAY_SENSOR::Write_To_Python(int evalPeriod) {
 
 	sprintf(outString,"%s \n",outString);
 
-        std::cout << outString;
+        (*outFile) << outString;
 }
 
 #endif

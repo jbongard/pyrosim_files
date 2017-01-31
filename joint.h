@@ -1,6 +1,9 @@
 #ifndef _JOINT_H
 #define _JOINT_H
 
+#include "iostream"
+using namespace std;
+
 #include "object.h"
 #include "proprioceptiveSensor.h"
 #include "neuron.h"
@@ -54,7 +57,7 @@ public:
 
 	void Update_Sensor_Neurons(int t);
 
-	void Write_To_Python(int evalPeriod);
+	void Write_To_Python(int evalPeriod, ofstream *outFile);
 
 private:
 	void Create_Fixed_Joint_In_Simulator(dWorldID world, OBJECT *firstObject, OBJECT *secondObject);

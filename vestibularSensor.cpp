@@ -1,7 +1,7 @@
 #ifndef _VESTIBULAR_SENSOR_CPP
 #define _VESTIBULAR_SENSOR_CPP
 
-#include "iostream"
+#include "fstream"
 #include "vestibularSensor.h"
 #include "neuron.h"
 
@@ -56,7 +56,7 @@ void VESTIBULAR_SENSOR::Update_Sensor_Neurons(int t) {
                 mySensorNeuron->Set( angles[t] );
 }
 
-void VESTIBULAR_SENSOR::Write_To_Python(int evalPeriod) {
+void VESTIBULAR_SENSOR::Write_To_Python(int evalPeriod, ofstream *outFile) {
 
         char outString[1000000];
 
@@ -68,7 +68,7 @@ void VESTIBULAR_SENSOR::Write_To_Python(int evalPeriod) {
 
         sprintf(outString,"%s \n",outString);
 
-        std::cout << outString;
+        (*outFile) << outString;
 }
 
 #endif

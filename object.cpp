@@ -271,27 +271,27 @@ void OBJECT::Update_Sensor_Neurons(int t) {
                 vestibularSensor->Update_Sensor_Neurons(t);
 }
 
-void OBJECT::Write_To_Python(int evalPeriod) {
+void OBJECT::Write_To_Python(int evalPeriod, ofstream *outFile) {
 
 	if ( raySensor )
 
-		raySensor->Write_To_Python(evalPeriod);
+		raySensor->Write_To_Python(evalPeriod,outFile);
 
 	if ( lightSensor )
 
-		lightSensor->Write_To_Python(evalPeriod);
+		lightSensor->Write_To_Python(evalPeriod,outFile);
 
 	if ( positionSensor )
 
-		positionSensor->Write_To_Python(evalPeriod);
+		positionSensor->Write_To_Python(evalPeriod,outFile);
 
 	if ( touchSensor )
 
-		touchSensor->Write_To_Python(evalPeriod);
+		touchSensor->Write_To_Python(evalPeriod,outFile);
 
         if ( vestibularSensor )
 
-                vestibularSensor->Write_To_Python(evalPeriod);
+                vestibularSensor->Write_To_Python(evalPeriod,outFile);
 }
 
 // ------------------------------- Private methods ------------------------------

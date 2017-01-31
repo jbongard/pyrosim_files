@@ -12,11 +12,11 @@ sim.Send_Joint( jointID = 0 , firstObjectID = 0 , secondObjectID = 1 , x=0, y=0,
 
 sim.Send_Touch_Sensor(sensorID = 0 , objectID = 0)
 
-#sim.Send_Touch_Sensor(sensorID = 1 , objectID = 1)
+sim.Send_Touch_Sensor(sensorID = 1 , objectID = 1)
 
-#sim.Send_Proprioceptive_Sensor(sensorID=2, jointID=0)
+sim.Send_Proprioceptive_Sensor(sensorID=2, jointID=0)
 
-#sim.Send_Ray_Sensor(sensorID = 3 , objectID = 1 , x = 0 , y = 1.1 , z = 1.1 , r1 = 0 , r2 = 1, r3 = 0)
+sim.Send_Ray_Sensor(sensorID = 3 , objectID = 1 , x = 0 , y = 1.1 , z = 1.1 , r1 = 0 , r2 = 1, r3 = 0)
 
 #sim.Send_Ray_Sensor(sensorID = 3 , objectID = 1 , x = 0 , y = 0.5 , z = 1.0 , r1 = 0 , r2 = 0, r3 = -1)
 
@@ -24,9 +24,10 @@ sim.Start()
 
 sim.Wait_To_Finish()
 
-sensorData = sim.Get_Sensor_Data(sensorID = 0)
+for s in range(0,3+1):
 
-print sensorData
+	sensorData = sim.Get_Sensor_Data(sensorID = s)
+	print sensorData
 
 #f = plt.figure()
 #pn = f.add_subplot(111)

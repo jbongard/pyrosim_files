@@ -9,6 +9,7 @@
 class ENVIRONMENT {
 
 private:
+	int fileNameIndex;
 
 	int numberOfBodies;
 

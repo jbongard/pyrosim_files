@@ -1,7 +1,7 @@
 #ifndef _POSITION_SENSOR_CPP
 #define _POSITION_SENSOR_CPP
 
-#include "iostream"
+#include "fstream"
 #include "positionSensor.h"
 #include "neuron.h"
 
@@ -62,7 +62,7 @@ void POSITION_SENSOR::Update_Sensor_Neurons(int t) {
                 mySensorNeurons[2]->Set( z[t] );
 }
 
-void POSITION_SENSOR::Write_To_Python(int evalPeriod) {
+void POSITION_SENSOR::Write_To_Python(int evalPeriod, ofstream *outFile) {
 
         char outString[1000000];
 
@@ -74,7 +74,7 @@ void POSITION_SENSOR::Write_To_Python(int evalPeriod) {
 
         sprintf(outString,"%s \n",outString);
 
-        std::cout << outString;
+        (*outFile) << outString;
 }
 
 #endif

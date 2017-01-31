@@ -1,7 +1,7 @@
 #ifndef _TOUCH_SENSOR_CPP
 #define _TOUCH_SENSOR_CPP
 
-#include "iostream"
+#include "fstream"
 #include "touchSensor.h"
 #include "neuron.h"
 
@@ -44,7 +44,7 @@ void TOUCH_SENSOR::Update_Sensor_Neurons(int t) {
                 mySensorNeuron->Set( values[t] );
 }
 
-void TOUCH_SENSOR::Write_To_Python(int evalPeriod) {
+void TOUCH_SENSOR::Write_To_Python(int evalPeriod, ofstream *outFile) {
 
         char outString[1000000];
 
@@ -56,7 +56,7 @@ void TOUCH_SENSOR::Write_To_Python(int evalPeriod) {
 
         sprintf(outString,"%s \n",outString);
 
-        std::cout << outString;
+	(*outFile) << outString;
 }
 
 #endif

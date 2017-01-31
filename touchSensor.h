@@ -3,6 +3,8 @@
 
 #include <ode/ode.h>
 
+using namespace std;
+
 class NEURON;
 
 class TOUCH_SENSOR {
@@ -28,7 +30,7 @@ public:
 
         void Update_Sensor_Neurons(int t);
 
-	void Write_To_Python(int evalPeriod);
+	void Write_To_Python(int evalPeriod, ofstream *outFile);
 };
 
 #endif
